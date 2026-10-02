@@ -154,7 +154,7 @@
                     <i class="fa-solid fa-seedling"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-primary-400 bg-clip-text text-transparent">TYLER'S FARM LENDING COOP</span>
+                    <span class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-primary-400 bg-clip-text text-transparent">TYLER'S FARM LENDING</span>
                     <span class="text-xs block text-slate-400 font-medium">Fast & Secure Digital Lending</span>
                 </div>
             </div>
@@ -225,9 +225,9 @@
                     <div class="mb-6">
                         <label class="text-sm font-medium text-slate-300 block mb-2">Interest Rate Type</label>
                         <select id="rate-type" class="w-full bg-slate-900 border border-borderDark rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-primary-500 transition-all text-sm font-semibold text-primary-400">
-                            <option value="flat">Flat Rate</option>
+                            <option value="flat">Compound Rate</option>
                             <option value="diminishing">Diminishing Rate</option>
-                            <option value="compound">Compound Rate</option>
+                            <option value="compound">Flat Rate</option>
                         </select>
                     </div>
 
@@ -244,28 +244,36 @@
                         </div>
                     </div>
 
+                    <!-- Loan Term Unit & Slider Selection -->
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-2">
-                            <label class="text-sm font-medium text-slate-300">Loan Term (Months)</label>
-                            <span id="term-val" class="text-lg font-bold text-primary-400">12 Months</span>
+                            <label class="text-sm font-medium text-slate-300">Loan Term Duration</label>
+                            <div class="flex items-center space-x-2">
+                                <select id="term-unit" class="bg-slate-900 border border-borderDark rounded-lg px-2 py-1 text-xs text-primary-400 font-semibold focus:outline-none focus:border-primary-500">
+                                    <option value="days">Days</option>
+                                    <option value="months" selected>Months</option>
+                                </select>
+                                <span id="term-val" class="text-lg font-bold text-primary-400">12 Months</span>
+                            </div>
                         </div>
                         <input type="range" id="loan-term" min="1" max="36" step="1" value="12" 
                             class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary-500">
                         <div class="flex justify-between text-xs text-slate-500 mt-1">
-                            <span>1 Mo</span>
-                            <span>36 Mos</span>
+                            <span id="term-min-label">1</span>
+                            <span id="term-max-label">120</span>
                         </div>
                     </div>
 
+                    <!-- Interest Rate (3% to 12%) -->
                     <div class="mb-6">
                         <div class="flex justify-between items-center mb-2">
                             <label class="text-sm font-medium text-slate-300">Interest Rate (%)</label>
-                            <span id="rate-val" class="text-lg font-bold text-primary-400">5.0%</span>
+                            <span id="rate-val" class="text-lg font-bold text-primary-400">3.0%</span>
                         </div>
-                        <input type="range" id="loan-rate" min="5.0" max="12.0" step="1.0" value="5.0" 
+                        <input type="range" id="loan-rate" min="3.0" max="12.0" step="0.5" value="5.0" 
                             class="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-primary-500">
                         <div class="flex justify-between text-xs text-slate-500 mt-1">
-                            <span>5.0%</span>
+                            <span>3.0%</span>
                             <span>12.0%</span>
                         </div>
                     </div>
@@ -275,7 +283,7 @@
                         <select id="payment-frequency" class="w-full bg-slate-900 border border-borderDark rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:border-primary-500 transition-all text-sm">
                             <option value="daily">Daily payments</option>
                             <option value="weekly">Weekly payments</option>
-                            <option value="bi-monthly">Bi-Monthly /every 15 days</option>
+                            <option value="bi-monthly">every 15 days</option>
                             <option value="monthly" selected>Monthly payment</option>
                             <option value="quarterly">Quarterly /Every 3 months</option>
                         </select>
@@ -288,7 +296,7 @@
                         </div>
                         <div class="relative">
                             <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400 font-semibold text-sm">₱</span>
-                            <input type="text" id="processing-fee-display" value="100.00" readonly 
+                            <input type="text" id="processing-fee-display" value="50.00" readonly 
                                 class="w-full bg-slate-950/60 border border-borderDark/80 rounded-xl pl-9 pr-4 py-3 text-slate-300 text-sm cursor-not-allowed font-semibold">
                         </div>
                         <span class="text-[11px] text-slate-500 mt-1 block">This amount will be added to each payment/installment.</span>
@@ -322,22 +330,22 @@
                     <div class="space-y-4 mb-6">
                         <div class="flex justify-between items-center py-2.5 border-b border-borderDark/60">
                             <span class="text-sm text-slate-400">Principal Amount</span>
-                            <span id="summary-principal" class="text-sm font-semibold text-white">₱50,000.00</span>
+                            <span id="summary-principal" class="text-sm font-semibold text-white">₱5,000.00</span>
                         </div>
                         <div class="flex justify-between items-center py-2.5 border-b border-borderDark/60">
                             <span class="text-sm text-slate-400">Total Interest</span>
-                            <span id="summary-interest" class="text-sm font-semibold text-emerald-400">₱9,000.00</span>
+                            <span id="summary-interest" class="text-sm font-semibold text-emerald-400">₱0.00</span>
                         </div>
                         <div class="flex justify-between items-center py-2.5 border-b border-borderDark/60">
                             <span class="text-sm text-slate-400">Total Processing Fee (Accumulated)</span>
-                            <span id="summary-fee" class="text-sm font-semibold text-amber-400">₱1,200.00</span>
+                            <span id="summary-fee" class="text-sm font-semibold text-amber-400">₱0.00</span>
                         </div>
                         <div class="flex justify-between items-center py-3 bg-slate-900/60 px-4 rounded-xl border border-borderDark">
                             <div>
                                 <span id="summary-due-label" class="text-xs font-bold text-slate-300 block">Equal Installment Due (w/ Fee)</span>
-                                <span id="summary-installments-count" class="text-[10px] text-slate-500">12 installments total</span>
+                                <span id="summary-installments-count" class="text-[10px] text-slate-500">0 installments total</span>
                             </div>
-                            <span id="summary-monthly" class="text-lg font-extrabold text-primary-400">₱5,100.00</span>
+                            <span id="summary-monthly" class="text-lg font-extrabold text-primary-400">₱0.00</span>
                         </div>
                     </div>
                 </div>
@@ -358,7 +366,7 @@
                             </button>
                         </div>
                     </div>
-                    <span id="preview-term-label" class="text-xs text-slate-400 font-normal block mb-3">12 payments preview</span>
+                    <span id="preview-term-label" class="text-xs text-slate-400 font-normal block mb-3">Payments preview</span>
                     
                     <div class="max-h-48 overflow-y-auto pr-1">
                         <table class="w-full text-left text-xs">
@@ -538,14 +546,14 @@
                     </h3>
                     <div class="space-y-2.5 text-xs">
                         <div class="flex justify-between"><span class="text-slate-400">Rate Type:</span> <span id="rev-ratetype" class="font-semibold text-primary-400">Flat Rate</span></div>
-                        <div class="flex justify-between"><span class="text-slate-400">Principal:</span> <span id="rev-principal" class="font-semibold text-white">₱50,000</span></div>
+                        <div class="flex justify-between"><span class="text-slate-400">Principal:</span> <span id="rev-principal" class="font-semibold text-white">₱5,000</span></div>
                         <div class="flex justify-between"><span class="text-slate-400">Term:</span> <span id="rev-term" class="font-semibold text-white">12 Months</span></div>
                         <div class="flex justify-between"><span class="text-slate-400">Frequency:</span> <span id="rev-frequency" class="font-semibold text-white">Monthly</span></div>
                         <div class="flex justify-between"><span class="text-slate-400">Interest Rate:</span> <span id="rev-rate" class="font-semibold text-white">3.0%</span></div>
                         <div class="flex justify-between"><span class="text-slate-400">Processing Fee / Inst:</span> <span id="rev-fee" class="font-semibold text-amber-400">₱100 / inst</span></div>
                         <div class="flex justify-between pt-2 border-t border-borderDark font-bold text-sm">
                             <span id="rev-due-label" class="text-slate-200">Equal Installment:</span> 
-                            <span id="rev-monthly" class="text-primary-400">₱5,100.00</span>
+                            <span id="rev-monthly" class="text-primary-400">₱0.00</span>
                         </div>
                     </div>
                 </div>
@@ -893,6 +901,7 @@
 
         const rateTypeSelect = document.getElementById('rate-type');
         const amountSlider = document.getElementById('loan-amount');
+        const termUnitSelect = document.getElementById('term-unit');
         const termSlider = document.getElementById('loan-term');
         const rateSlider = document.getElementById('loan-rate');
         const frequencySelect = document.getElementById('payment-frequency');
@@ -901,6 +910,8 @@
         const amountValSpan = document.getElementById('amount-val');
         const termValSpan = document.getElementById('term-val');
         const rateValSpan = document.getElementById('rate-val');
+        const termMinLabel = document.getElementById('term-min-label');
+        const termMaxLabel = document.getElementById('term-max-label');
 
         const summaryPrincipal = document.getElementById('summary-principal');
         const summaryInterest = document.getElementById('summary-interest');
@@ -947,43 +958,71 @@
 
         let currentAmortizationData = [];
 
+        function updateTermSliderLimits() {
+            const unit = termUnitSelect.value;
+            const currentVal = parseInt(termSlider.value);
+            if (unit === 'days') {
+                termSlider.min = "1";
+                termSlider.max = "90";
+                termSlider.step = "1";
+                termMinLabel.textContent = "1 Day";
+                termMaxLabel.textContent = "90 Days";
+                if (currentVal > 90) termSlider.value = "30";
+            } else {
+                termSlider.min = "1";
+                termSlider.max = "36";
+                termSlider.step = "1";
+                termMinLabel.textContent = "1 Mo";
+                termMaxLabel.textContent = "36 Mos";
+                if (currentVal > 36) termSlider.value = "12";
+            }
+            calculateLoan();
+        }
+
         function calculateLoan() {
             const config = getConfig();
             let feePerInstallment = config.processingFeePerInstallment;
             
             const rateType = rateTypeSelect.value;
             const principal = parseFloat(amountSlider.value);
-            const months = parseInt(termSlider.value);
+            const termVal = parseInt(termSlider.value);
+            const termUnit = termUnitSelect.value;
             const monthlyRate = parseFloat(rateSlider.value) / 100;
             const frequency = frequencySelect.value;
             const initialDueDateStr = document.getElementById('dueDate') ? document.getElementById('dueDate').value : '';
 
             amountValSpan.textContent = formatPeso(principal);
-            termValSpan.textContent = months + ' Months';
-            rateValSpan.textContent = parseFloat(rateSlider.value).toFixed(1) + '% / mo';
+            termValSpan.textContent = termVal + ' ' + (termUnit === 'days' ? (termVal === 1 ? 'Day' : 'Days') : (termVal === 1 ? 'Month' : 'Months'));
+            rateValSpan.textContent = parseFloat(rateSlider.value).toFixed(1) + '%';
 
-            let totalInstallments = months;
+            let totalInstallments = termVal;
             let freqLabel = "Equal Installment Due (w/ Fee)";
 
-            if (frequency === 'daily') { 
-                totalInstallments = months * 22; 
-                freqLabel = "Daily Equal Installment (w/ Fee)"; 
-            }
-            else if (frequency === 'weekly') { 
-                totalInstallments = months * 4; 
-                freqLabel = "Weekly Equal Installment (w/ Fee)"; 
-            }
-            else if (frequency === 'bi-monthly') { 
-                totalInstallments = months * 2; 
-                freqLabel = "Bi-Monthly Equal Installment (w/ Fee)"; 
-            }
-            else if (frequency === 'monthly') { 
-                totalInstallments = months; 
-                freqLabel = "Monthly Equal Installment (w/ Fee)"; 
-            }
-            else if (frequency === 'quarterly') { 
-                totalInstallments = Math.max(1, Math.round(months / 3)); 
-                freqLabel = "Quarterly Equal Installment (w/ Fee)"; 
+            if (termUnit === 'days') {
+                // If term is in days, total installments is directly the number of days or mapped by frequency
+                totalInstallments = termVal;
+                freqLabel = "Daily Equal Installment (w/ Fee)";
+            } else {
+                if (frequency === 'daily') { 
+                    totalInstallments = termVal * 22; 
+                    freqLabel = "Daily Equal Installment (w/ Fee)"; 
+                }
+                else if (frequency === 'weekly') { 
+                    totalInstallments = termVal * 4; 
+                    freqLabel = "Weekly Equal Installment (w/ Fee)"; 
+                }
+                else if (frequency === 'bi-monthly') { 
+                    totalInstallments = termVal * 2; 
+                    freqLabel = "Bi-Monthly Equal Installment (w/ Fee)"; 
+                }
+                else if (frequency === 'monthly') { 
+                    totalInstallments = termVal; 
+                    freqLabel = "Monthly Equal Installment (w/ Fee)"; 
+                }
+                else if (frequency === 'quarterly') { 
+                    totalInstallments = Math.max(1, Math.round(termVal / 3)); 
+                    freqLabel = "Quarterly Equal Installment (w/ Fee)"; 
+                }
             }
 
             processingFeeDisplay.value = feePerInstallment.toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -992,8 +1031,20 @@
             let totalPayment = 0;
             currentAmortizationData = [];
 
+            // Compute effective periodic rate based on term unit
+            let effectiveRatePerPeriod = monthlyRate;
+            if (termUnit === 'days') {
+                // Convert monthly rate to daily approximation or simple proportion
+                effectiveRatePerPeriod = (monthlyRate / 30) * termVal; 
+            }
+
             if (rateType === 'flat') {
-                totalInterest = principal * monthlyRate * months;
+                if (termUnit === 'days') {
+                    totalInterest = principal * (monthlyRate / 30) * termVal;
+                } else {
+                    totalInterest = principal * monthlyRate * termVal;
+                }
+                
                 const basePrincipalPart = principal / totalInstallments;
                 const baseInterestPart = totalInterest / totalInstallments;
                 const baseInstallmentDue = basePrincipalPart + baseInterestPart;
@@ -1003,7 +1054,7 @@
 
                 for (let i = 1; i <= totalInstallments; i++) {
                     remainingBalance -= installmentDueWithFee;
-                    let dueDateObj = getNextDueDate(initialDueDateStr, i, frequency);
+                    let dueDateObj = getNextDueDate(initialDueDateStr, i, termUnit === 'days' ? 'daily' : frequency);
                     currentAmortizationData.push({
                         no: i,
                         dueDate: dueDateObj.toISOString().split('T')[0],
@@ -1018,7 +1069,7 @@
                 summaryMonthly.textContent = formatPeso(installmentDueWithFee);
             } 
             else if (rateType === 'diminishing') {
-                const r = monthlyRate * (months / totalInstallments);
+                const r = termUnit === 'days' ? (monthlyRate / 30) : (monthlyRate * (termVal / totalInstallments));
                 let baseInstallment = 0;
                 if (r === 0) {
                     baseInstallment = principal / totalInstallments;
@@ -1035,7 +1086,7 @@
                     totalInterest += interestPart;
                     balance -= principalPart;
 
-                    let dueDateObj = getNextDueDate(initialDueDateStr, i, frequency);
+                    let dueDateObj = getNextDueDate(initialDueDateStr, i, termUnit === 'days' ? 'daily' : frequency);
                     currentAmortizationData.push({
                         no: i,
                         dueDate: dueDateObj.toISOString().split('T')[0],
@@ -1050,7 +1101,7 @@
                 summaryMonthly.textContent = formatPeso(installmentDueWithFee);
             }
             else if (rateType === 'compound') {
-                const ratePerPeriod = monthlyRate * (months / totalInstallments);
+                const ratePerPeriod = termUnit === 'days' ? (monthlyRate / 30) : (monthlyRate * (termVal / totalInstallments));
                 const compoundAmount = principal * Math.pow(1 + ratePerPeriod, totalInstallments);
                 totalInterest = Math.max(0, compoundAmount - principal);
                 
@@ -1063,7 +1114,7 @@
 
                 for (let i = 1; i <= totalInstallments; i++) {
                     remainingBalance -= installmentDueWithFee;
-                    let dueDateObj = getNextDueDate(initialDueDateStr, i, frequency);
+                    let dueDateObj = getNextDueDate(initialDueDateStr, i, termUnit === 'days' ? 'daily' : frequency);
                     currentAmortizationData.push({
                         no: i,
                         dueDate: dueDateObj.toISOString().split('T')[0],
@@ -1110,6 +1161,7 @@
 
         rateTypeSelect.addEventListener('change', calculateLoan);
         amountSlider.addEventListener('input', calculateLoan);
+        termUnitSelect.addEventListener('change', updateTermSliderLimits);
         termSlider.addEventListener('input', calculateLoan);
         rateSlider.addEventListener('input', calculateLoan);
         frequencySelect.addEventListener('change', calculateLoan);
@@ -1120,7 +1172,8 @@
         function printAmortizationSchedule() {
             if (currentAmortizationData.length === 0) return;
             const principal = parseFloat(amountSlider.value);
-            const months = parseInt(termSlider.value);
+            const termVal = termSlider.value;
+            const termUnit = termUnitSelect.value;
             const rateType = rateTypeSelect.options[rateTypeSelect.selectedIndex].text;
             const frequency = frequencySelect.value;
 
@@ -1138,7 +1191,7 @@
             </style></head><body>
                 <h1>TYLER'S FARM LENDING COOP</h1>
                 <h3 style="text-align:center;">Amortization Schedule (${rateType}) - Per-Installment Fee</h3>
-                <p><strong>Principal:</strong> ${formatPeso(principal)} | <strong>Term:</strong> ${months} Months | <strong>Frequency:</strong> ${frequency.toUpperCase()}</p>
+                <p><strong>Principal:</strong> ${formatPeso(principal)} | <strong>Term:</strong> ${termVal} ${termUnit} | <strong>Frequency:</strong> ${frequency.toUpperCase()}</p>
                 <table><thead><tr><th>No.</th><th>Due Date</th><th>Principal</th><th>Interest</th><th>Fee</th><th class="text-right">Total Due</th></tr></thead><tbody>`;
             
             currentAmortizationData.forEach(row => {
@@ -1168,7 +1221,8 @@
         function exportToWordDoc() {
             if (currentAmortizationData.length === 0) return;
             const principal = parseFloat(amountSlider.value);
-            const months = parseInt(termSlider.value);
+            const termVal = termSlider.value;
+            const termUnit = termUnitSelect.value;
             const rateType = rateTypeSelect.options[rateTypeSelect.selectedIndex].text;
             const frequency = frequencySelect.value;
 
@@ -1195,7 +1249,7 @@
                     <h3>Amortization Schedule & Signatories</h3>
                     <p><strong>Interest Type:</strong> ${rateType}<br/>
                        <strong>Principal Loan:</strong> ${formatPeso(principal)}<br/>
-                       <strong>Term:</strong> ${months} Months<br/>
+                       <strong>Term:</strong> ${termVal} ${termUnit}<br/>
                        <strong>Payment Frequency:</strong> ${frequency.toUpperCase()}
                     </p>
                     <table>
@@ -1300,14 +1354,15 @@
         function populateReviewData() {
             const config = getConfig();
             const principal = parseFloat(amountSlider.value);
-            const months = parseInt(termSlider.value);
+            const termVal = termSlider.value;
+            const termUnit = termUnitSelect.value;
             const rateType = rateTypeSelect.options[rateTypeSelect.selectedIndex].text;
             
             document.getElementById('rev-ratetype').textContent = rateType;
             document.getElementById('rev-principal').textContent = formatPeso(principal);
-            document.getElementById('rev-term').textContent = months + ' Months';
+            document.getElementById('rev-term').textContent = termVal + ' ' + termUnit;
             document.getElementById('rev-frequency').textContent = frequencySelect.options[frequencySelect.selectedIndex].text;
-            document.getElementById('rev-rate').textContent = parseFloat(rateSlider.value).toFixed(1) + '% / mo';
+            document.getElementById('rev-rate').textContent = parseFloat(rateSlider.value).toFixed(1) + '%';
             document.getElementById('rev-fee').textContent = formatPeso(config.processingFeePerInstallment) + ' / inst';
             document.getElementById('rev-monthly').textContent = summaryMonthly.textContent;
 
@@ -1373,7 +1428,7 @@
                 lastName: document.getElementById('lastName').value,
                 mobile: '+63 ' + document.getElementById('mobile').value,
                 principal: parseFloat(amountSlider.value),
-                term: parseInt(termSlider.value),
+                term: termSlider.value + ' ' + termUnitSelect.value,
                 frequency: frequencySelect.value,
                 installmentDue: summaryMonthly.textContent,
                 dueDate: document.getElementById('dueDate').value,
